@@ -130,14 +130,7 @@ li {
 
   // 手順3-2
   Object.keys(fileManage).forEach((obj_values) => {
-//    console.log(fileManage[obj_values]);
-//    console.log(obj_values.foldername);  //こうやって出力すると文字列として扱われる
     Object.keys(fileManage[obj_values]).forEach((f00_values) => {
-      // keyとvalueを確認する
-//      console.log('key = '+f00_values);
-//      console.log('value = '+fileManage[obj_values][f00_values]);
-      // HTMLのIDに合わせる
-//      console.log(obj_values+'-'+f00_values);
       // HTMLに代入する
       document.getElementById(obj_values + '-' + f00_values).textContent = fileManage[obj_values][f00_values];
 
@@ -150,8 +143,6 @@ li {
 
   // 手順3-3
   everyone_list.forEach((folders) => {
-    // ごり押し晩   これでも追加自体はできるが、バランスも取れないしdocument.write自体あまり使わない
-//    document.write('<li>'+folders+'</li>');
 
     // 子要素を作る
     const accessible = document.createElement('li');
