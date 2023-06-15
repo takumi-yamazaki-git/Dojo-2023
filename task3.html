@@ -92,8 +92,6 @@ li {
 <script>
   // ここに処理を記載する
 
-  //手順3-1
-  //番号ごとのオブジェクトを定義する
   const f001_obj = {
     folderName: '情報システム部',
     viewAuth: 'Everyone',
@@ -115,41 +113,23 @@ li {
     deleteAuth: '営業部'
   };
 
-  // 3つのobjectを内包したobject fileManage を作成する
   const fileManage = {
     f001: f001_obj,
     f002: f002_obj,
     f003: f003_obj
   };
 
-  // 手順3-3 先にlistを定義しておく
-  const everyone_list = [];
-
-  // 作成したobjectをコンソールに表示する
   console.log(fileManage);
 
-  // 手順3-2
   Object.keys(fileManage).forEach((obj_values) => {
     Object.keys(fileManage[obj_values]).forEach((f00_values) => {
-      // HTMLに代入する
       document.getElementById(obj_values + '-' + f00_values).textContent = fileManage[obj_values][f00_values];
-
-    })
-    // 手順3-3
-    if (fileManage[obj_values].viewAuth === 'Everyone' ) {
-      everyone_list.push(fileManage[obj_values].folderName);
+    });
+    if (fileManage[obj_values].viewAuth === 'Everyone') {
+      const accessible = document.createElement('li');
+      accessible.innerText = fileManage[obj_values].folderName;
+      document.getElementById('list').appendChild(accessible);
     }
-  });
-
-  // 手順3-3
-  everyone_list.forEach((folders) => {
-
-    // 子要素を作る
-    const accessible = document.createElement('li');
-    // 要素にテキストを追加する
-    accessible.innerText = folders;
-    // 追加したテキストをlistの子要素として追加する
-    document.getElementById('list').appendChild(accessible);
   });
 
 </script>
