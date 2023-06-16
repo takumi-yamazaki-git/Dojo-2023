@@ -72,12 +72,12 @@ header h2 {
   document.getElementById('btn').onclick = () => {
 
     const chkList = document.getElementsByClassName('chk');
-    const userCount = document.getElementsByClassName('slct');
+    const pullDownValue = document.getElementsByClassName('slct');
     let optionPrice = 0;
 
     for (let indexNum = 0; indexNum < chkList.length; indexNum++) {
       if (chkList[indexNum].checked === true) {
-        optionPrice += (Number(chkList[indexNum].value) * Number(userCount[indexNum].value));
+        optionPrice += (Number(chkList[indexNum].value) * Number(pullDownValue[indexNum].value));
       }
     }
     optionPrice += 3900;
