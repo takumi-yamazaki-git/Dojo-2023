@@ -53,10 +53,7 @@ header h2 {
 <script>
   // ここに処理を記載する
 
-  // 繰り返し実行される関数を定義する
-
-  console.log(document.getElementsByClassName('chk').value);
-  document.getElementsByClassName('chk').value.checked = () => {
+  const calcPrice = () => {
     const secureOption = document.getElementsByClassName('chk')[0];
     const addDick = document.getElementsByClassName('chk')[1];
     let addPrice = 0;
@@ -67,8 +64,16 @@ header h2 {
       addPrice += Number(addDick.value);
     }
     document.getElementById('price').textContent = 3900 + Number(addPrice);
+  }
+
+  document.getElementsByClassName('chk')[0].onclick = () => {
+    calcPrice();
   };
-  
+
+  document.getElementsByClassName('chk')[1].onclick = () => {
+    calcPrice();
+  };
+
 </script>
 </body>
 </html>
