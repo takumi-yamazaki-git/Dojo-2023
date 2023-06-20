@@ -55,16 +55,16 @@ header h2 {
 
   const calcPrice = () => {
     const secureOption = document.getElementsByClassName('chk')[0];
-    const addDick = document.getElementsByClassName('chk')[1];
+    const addDisk = document.getElementsByClassName('chk')[1];
     let addPrice = 0;
     if (secureOption.checked === true) {
       addPrice += Number(secureOption.value);
     }
-    if (addDick.checked === true) {
-      addPrice += Number(addDick.value);
+    if (addDisk.checked === true) {
+      addPrice += Number(addDisk.value);
     }
     document.getElementById('price').textContent = 3900 + Number(addPrice);
-  }
+  };
 
   document.getElementsByClassName('chk')[0].onclick = () => {
     calcPrice();
