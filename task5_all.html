@@ -52,7 +52,6 @@
 
       const strChanger = (str) => {
         const strNum = str.length;
-        console.log(strNum);
         if (strNum >= 30) {
           str = str.substr(0, 30);
           str += '...';
@@ -69,14 +68,12 @@
         }
       })
       .then((reps) => {
-        console.log(reps);
         for (let tableDisp = 0; tableDisp < reps.data.length; tableDisp++) {
           const tdday = reps.data[tableDisp].day.value;
           const tdcate = reps.data[tableDisp].category.value;
           const tdcont = reps.data[tableDisp].content.value;
           const tdurl = reps.data[tableDisp].url.value;
           const tdtarget = reps.data[tableDisp].target.value;
-          console.log(tdtarget);
           tablecreator(tdday, tdcate, tdcont, tdurl, tdtarget);
         }
       })
