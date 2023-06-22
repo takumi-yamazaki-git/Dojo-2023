@@ -17,38 +17,38 @@
       const apiUrl = 'https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo';
 
       const tablecreator = (day, category, content, url, targ) => {
-        const tr_ele = document.createElement('tr');
-        const url_ele = document.createElement('a');
-        const td_day = document.createElement('td');
-        td_day.textContent = day;
-        tr_ele.appendChild(td_day);
-        const td_category = document.createElement('td');
-        td_category.textContent = category;
+        const trEle = document.createElement('tr');
+        const tdDay = document.createElement('td');
+        tdDay.textContent = day;
+        trEle.appendChild(tdDay);
+        const tdCategory = document.createElement('td');
+        tdCategory.textContent = category;
         switch (category) {
           case '製品':
-            td_category.className = 'product';
+            tdCategory.className = 'product';
             break;
           case 'IR 情報':
-            td_category.className = 'ir';
+            tdCategory.className = 'ir';
             break;
           case '企業情報':
-            td_category.className = 'comparny';
+            tdCategory.className = 'comparny';
             break;
         }
-        tr_ele.appendChild(td_category);
-        const td_content = document.createElement('td');
-        url_ele.href = url;
+        trEle.appendChild(tdCategory);
+        const tdContent = document.createElement('td');
+        const urlEle = document.createElement('a');
+        urlEle.href = url;
         if (targ === '_self') {
-          url_ele.target = '_self';
+          urlEle.target = '_self';
         } else {
-          url_ele.target = '_brank';
+          urlEle.target = '_brank';
         }
         const formattedcontent = strChanger(content);
-        url_ele.innerText = formattedcontent;
-        td_content.appendChild(url_ele);
-        tr_ele.appendChild(td_content);
+        urlEle.innerText = formattedcontent;
+        tdContent.appendChild(urlEle);
+        trEle.appendChild(tdContent);
         const addNews = document.getElementById('addNews');
-        addNews.appendChild(tr_ele);
+        addNews.appendChild(trEle);
       };
 
       const strChanger = (str) => {
