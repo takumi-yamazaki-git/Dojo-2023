@@ -47,6 +47,3 @@
     return event;
   });
 })();
-
-// date-fnsを有効にするため、kintoneに以下のURLを登録しておく
-// https://cdnjs.cloudflare.com/ajax/libs/date-fns/1.28.5/date_fns.min.js
