@@ -30,17 +30,17 @@ tr, td{
   font-size: 12pt;
   padding: 4pt 2pt 4pt 2pt;
 }
-#product{
+.product{
   background-color: #00bfff;
   color: white;
   text-align: center;
 }
-#ir{
+.ir{
   background-color: #dc143c;
   color: white;
   text-align: center;
 }
-#comparny{
+.comparny{
   background-color: #32cd32;
   color: white;
   text-align: center;
