@@ -7,7 +7,7 @@
 
   const imputfeakd = (eve, day, pro, id) => {
     eve.record.重複禁止項目_文字列.value = `${day}-${pro}-${id}`;
-  }
+  };
 
   kintone.events.on('app.record.create.show', (event) => {
     event.record.重複禁止項目_文字列.disabled = true;
@@ -24,18 +24,18 @@
 
   kintone.events.on('app.record.create.change.サイボウズ製品', (event) => {
     switch (event.record.サイボウズ製品.value) {
-      case 'kintone' :
+      case 'kintone':
         imputPro = 'KN';
         break;
-      case 'Garoon' :
+      case 'Garoon':
         imputPro = 'GR';
         break;
-      case 'サイボウズ Office' :
+      case 'サイボウズ Office':
         imputPro = 'OF';
         break;
-      case 'Mailwise' :
+      case 'Mailwise':
         imputPro = 'MW';
-        break;              
+        break;
     }
     imputfeakd(event, imputDay, imputPro, imputId);
     return event;
