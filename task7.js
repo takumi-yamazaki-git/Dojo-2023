@@ -1,48 +1,38 @@
 (() => {
   'use strict';
 
-  let imputDay = '';
-  let imputPro = '';
-  let imputId = '';
+  const eventLs = [
+    'app.record.create.show',
+    'app.record.create.change.日付',
+    'app.record.create.change.サイボウズ製品',
+    'app.record.create.change.管理番号',
+    'app.record.edit.show',
+    'app.record.edit.change.日付',
+    'app.record.edit.change.サイボウズ製品',
+    'app.record.edit.change.管理番号',
+  ]
 
   const imputfeakd = (eve, day, pro, id) => {
     eve.record.重複禁止項目_文字列.value = `${day}-${pro}-${id}`;
   };
 
-  kintone.events.on('app.record.create.show', (event) => {
-    event.record.重複禁止項目_文字列.disabled = true;
-    imputDay = dateFns.format(event.record.日付.value, 'YYYYMMDD');
-    imputfeakd(event, imputDay, imputPro, imputId);
-    return event;
-  });
-
-  kintone.events.on('app.record.create.change.日付', (event) => {
-    imputDay = dateFns.format(event.record.日付.value, 'YYYYMMDD');
-    imputfeakd(event, imputDay, imputPro, imputId);
-    return event;
-  });
-
-  kintone.events.on('app.record.create.change.サイボウズ製品', (event) => {
-    switch (event.record.サイボウズ製品.value) {
+  const proName = (name) => {
+    switch (name) {
       case 'kintone':
-        imputPro = 'KN';
-        break;
+        return 'KN';
       case 'Garoon':
-        imputPro = 'GR';
-        break;
+        return 'GR';
       case 'サイボウズ Office':
-        imputPro = 'OF';
-        break;
+        return 'OF';
       case 'Mailwise':
-        imputPro = 'MW';
-        break;
+        return 'MW';
     }
-    imputfeakd(event, imputDay, imputPro, imputId);
-    return event;
-  });
-
-  kintone.events.on('app.record.create.change.管理番号', (event) => {
-    imputId = event.record.管理番号.value;
+  }
+    kintone.events.on(eventLs, (event) => {
+    event.record.重複禁止項目_文字列.disabled = true;
+    const imputDay = dateFns.format(event.record.日付.value, 'YYYYMMDD');
+    const imputPro = proName(event.record.サイボウズ製品.value);
+    const imputId = event.record.管理番号.value;
     imputfeakd(event, imputDay, imputPro, imputId);
     return event;
   });
