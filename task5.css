@@ -1,4 +1,4 @@
-  body {
+body {
   height: 100%;
   background-color: white;
 }
@@ -42,6 +42,11 @@ tr, td{
 }
 .comparny{
   background-color: #32cd32;
+  color: white;
+  text-align: center;
+}
+.otherthings{
+  background-color: #6a5acd;
   color: white;
   text-align: center;
 }

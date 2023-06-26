@@ -16,8 +16,8 @@
     <script>
 
       const apiUrl = 'https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo';
-      
-      const tablecreator = (day, category, content, url, targ) => {
+
+      const createTable = (day, category, content, url, targ) => {
         const trEle = document.createElement('tr');
         const tdDay = document.createElement('td');
         tdDay.textContent = day;
@@ -34,6 +34,9 @@
           case '企業情報':
             tdCategory.className = 'comparny';
             break;
+          default: //それ以外のカテゴリがあった場合の処理
+            tdCategory.className = 'otherthings';
+            break;
         }
         trEle.appendChild(tdCategory);
         const tdContent = document.createElement('td');
@@ -44,7 +47,7 @@
         } else {
           urlEle.target = '_brank';
         }
-        const formattedcontent = strChanger(content);
+        const formattedcontent = changeStr(content);
         urlEle.innerText = formattedcontent;
         tdContent.appendChild(urlEle);
         trEle.appendChild(tdContent);
@@ -52,7 +55,7 @@
         addNews.appendChild(trEle);
       };
 
-      const strChanger = (str) => {
+      const changeStr = (str) => {
         const strNum = str.length;
         if (strNum >= 30) {
           str = str.substr(0, 30);
@@ -63,32 +66,31 @@
         }
       };
 
-      const waitFunc =(async () => {
-        let apiexe = axios.get(apiUrl, {
-          params: {
-            id: 'dojo',
-            query: 'order by day desc limit 3',
-          }
-        })
-        .then(async(reps) => {
-          for (let i = 0; i < reps.data.length; i++) {
-            const tdday = reps.data[i].day.value;
-            const tdcate = reps.data[i].category.value;
-            const tdcont = reps.data[i].content.value;
-            const tdurl = reps.data[i].url.value;
-            const tdtarget = reps.data[i].target.value;
-            tablecreator(tdday, tdcate, tdcont, tdurl, tdtarget);
-          }
-        })
-        .catch((err) => {
-          window.alert('読み込みエラーが発生しました。ページを開きなおしてください。\n何度も表示された場合は、コンソールをご覧ください。');
-          console.log('下記のエラーが発生しました↓');
-          console.log(err);
-        });
-        await apiexe;
-      });
+      const sortObj = (obj) => {
+        for (let i = 0; i < obj.data.length; i++) {
+          const tdday = obj.data[i].day.value;
+          const tdcate = obj.data[i].category.value;
+          const tdcont = obj.data[i].content.value;
+          const tdurl = obj.data[i].url.value;
+          const tdtarget = obj.data[i].target.value;
+          createTable(tdday, tdcate, tdcont, tdurl, tdtarget);
+        }
+      }
 
-      waitFunc();
+      axios.get(apiUrl, {
+        params: {
+          id: 'dojo',
+          query: 'order by day desc limit 3',
+        }
+      })
+      .then(async(reps) => {
+        sortObj(reps);
+      })
+      .catch((err) => {
+        window.alert('読み込みエラーが発生しました。ページを開きなおしてください。\n何度も表示された場合は、コンソールをご覧ください。');
+        console.log('下記のエラーが発生しました↓');
+        console.log(err);
+      });
     </script>
   </body>
 </html>
