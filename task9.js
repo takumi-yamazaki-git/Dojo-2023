@@ -59,11 +59,11 @@
     const getValues = await kintone.api(kintone.api.url('/k/v1/records.json'), 'GET', saveParam);
     const getList = [];
     for (let i = 0; i < getValues.records.length; i++) {
-      getList[i] = await getValues.records[i].重複禁止項目.value;
+      getList[i] = getValues.records[i].重複禁止項目.value;
     }
     if (checkrepeat(saveevent.record.重複禁止項目.value,getList) !== 0) {
-      if (window.confirm(`${checkrepeat(saveevent.record.重複禁止項目.value,getList)}件のレコードと重複しています。\nこのまま保存しますか？`) === false) {
-//      if (window.confirm('レコードが重複しています。このまま保存しますか？') === false) {
+//      if (window.confirm(`${checkrepeat(saveevent.record.重複禁止項目.value,getList)}件のレコードと重複しています。\nこのまま保存しますか？`) === false) {
+      if (window.confirm('レコードが重複しています。このまま保存しますか？') === false) {
         saveevent = false;
         return saveevent;
       }  
