@@ -41,20 +41,12 @@
       };
 
       const setClassName = (getcategory) => {
-        switch (getcategory) {
-          case '製品':
-            return 'product';
-            break;
-          case 'IR 情報':
-            return 'ir';
-            break;
-          case '企業情報':
-            return 'comparny';
-            break;
-          default:
-            return 'otherthings';
-            break;
-        }
+        const alternativeSetClass = {
+          '製品':'product',
+          'IR 情報':'ir',
+          '企業情報':'comparny'
+        };
+        return alternativeSetClass[getcategory] || 'otherthings';
       }
 
       const changeStr = (str) => {
@@ -70,12 +62,12 @@
 
       const sortObj = (obj) => {
         for (let i = 0; i < obj.data.length; i++) {
-          const tdDay = obj.data[i].day.value;
-          const tdCate = obj.data[i].category.value;
-          const tdCont = obj.data[i].content.value;
-          const tdUrl = obj.data[i].url.value;
-          const tdTerget = obj.data[i].target.value;
-          createTable(tdDay, tdCate, tdCont, tdUrl, tdTerget);
+          const sortDay = obj.data[i].day.value;
+          const sortCate = obj.data[i].category.value;
+          const sortCont = obj.data[i].content.value;
+          const sortUrl = obj.data[i].url.value;
+          const sortTerget = obj.data[i].target.value;
+          createTable(sortDay, sortCate, sortCont, sortUrl, sortTerget);
         }
       }
 
