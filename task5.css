@@ -1,0 +1,52 @@
+body {
+  height: 100%;
+  background-color: white;
+}
+
+h1 {
+  font-size: 26pt;
+}
+
+span#titleLeft {
+  display: block;
+  text-align: left;
+}
+
+span#titleRight {
+  display: block;
+  text-align: right;
+}
+
+table{
+  width: 80%;
+  margin:auto;
+  border-collapse: collapse;
+  border: 1px solid #000;
+}
+
+tr, td{
+  border-collapse: collapse;
+  border: 1px solid #000;
+  font-size: 12pt;
+  padding: 4pt 2pt 4pt 2pt;
+}
+.product{
+  background-color: #00bfff;
+  color: white;
+  text-align: center;
+}
+.ir{
+  background-color: #dc143c;
+  color: white;
+  text-align: center;
+}
+.comparny{
+  background-color: #32cd32;
+  color: white;
+  text-align: center;
+}
+.otherthings{
+  background-color: #6a5acd;
+  color: white;
+  text-align: center;
+}

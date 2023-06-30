@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="task5.css">
+    <title>dojo 中間課題</title>
+  </head>
+  <body>
+    <h1><span id="titleLeft">「自分のHPで、APIで取得したデータをもとに。</span>
+    <span id="titleRight">最新情報を表示するようなサイトを作りたい」</span></h1>
+    <script src="https://js.cybozu.com/axios/v0.27.2/axios.min.js"></script>
+    <table id="addNews">
+    </table>
+    <script>
+
+      const createTable = (day, category, content, url, targ) => {
+        const trEle = document.createElement('tr');
+        const tdDay = document.createElement('td');
+        tdDay.textContent = day;
+        trEle.appendChild(tdDay);
+        const tdCategory = document.createElement('td');
+        tdCategory.textContent = category;
+        tdCategory.className = setClassName(category);
+        trEle.appendChild(tdCategory);
+        const tdContent = document.createElement('td');
+        const urlEle = document.createElement('a');
+        urlEle.href = url;
+        if (targ === '_self') {
+          urlEle.target = '_self';
+        } else {
+          urlEle.target = '_brank';
+        }
+        const formattedContent = changeStr(content);
+        urlEle.innerText = formattedContent;
+        tdContent.appendChild(urlEle);
+        trEle.appendChild(tdContent);
+        const addNews = document.getElementById('addNews');
+        addNews.appendChild(trEle);
+      };
+
+      const setClassName = (getcategory) => {
+        const alternativeSetClass = {
+          '製品':'product',
+          'IR 情報':'ir',
+          '企業情報':'comparny'
+        };
+        return alternativeSetClass[getcategory] || 'otherthings';
+      }
+
+      const changeStr = (str) => {
+        const strNum = str.length;
+        if (strNum >= 30) {
+          str = str.substr(0, 30);
+          str += '...';
+          return str;
+        } else {
+          return str;
+        }
+      };
+
+      const sortObj = (obj) => {
+        for (let i = 0; i < obj.data.length; i++) {
+          const sortDay = obj.data[i].day.value;
+          const sortCate = obj.data[i].category.value;
+          const sortCont = obj.data[i].content.value;
+          const sortUrl = obj.data[i].url.value;
+          const sortTerget = obj.data[i].target.value;
+          createTable(sortDay, sortCate, sortCont, sortUrl, sortTerget);
+        }
+      }
+
+      const apiUrl = 'https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo';
+      axios.get(apiUrl, {
+        params: {
+          id: 'dojo',
+          query: 'order by day desc limit 3',
+        }
+      })
+      .then(async(reps) => {
+        sortObj(reps);
+      })
+      .catch((err) => {
+        window.alert('読み込みエラーが発生しました。ページを開きなおしてください。\n何度も表示された場合は、コンソールをご覧ください。');
+        console.log('下記のエラーが発生しました↓');
+        console.log(err);
+      });
+    </script>
+  </body>
+</html>
