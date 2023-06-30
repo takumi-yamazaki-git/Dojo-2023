@@ -10,12 +10,10 @@
   <body>
     <h1><span id="titleLeft">「自分のHPで、APIで取得したデータをもとに。</span>
     <span id="titleRight">最新情報を表示するようなサイトを作りたい」</span></h1>
-    <script src="https://js.cybozu.com/axios/v0.27.2/axios.min.js"></script>  
+    <script src="https://js.cybozu.com/axios/v0.27.2/axios.min.js"></script>
     <table id="addNews">
     </table>
     <script>
-
-      const apiUrl = 'https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo';
 
       const createTable = (day, category, content, url, targ) => {
         const trEle = document.createElement('tr');
@@ -24,20 +22,7 @@
         trEle.appendChild(tdDay);
         const tdCategory = document.createElement('td');
         tdCategory.textContent = category;
-        switch (category) {
-          case '製品':
-            tdCategory.className = 'product';
-            break;
-          case 'IR 情報':
-            tdCategory.className = 'ir';
-            break;
-          case '企業情報':
-            tdCategory.className = 'comparny';
-            break;
-          default: //それ以外のカテゴリがあった場合の処理
-            tdCategory.className = 'otherthings';
-            break;
-        }
+        tdCategory.className = setClassName(category);
         trEle.appendChild(tdCategory);
         const tdContent = document.createElement('td');
         const urlEle = document.createElement('a');
@@ -47,13 +32,30 @@
         } else {
           urlEle.target = '_brank';
         }
-        const formattedcontent = changeStr(content);
-        urlEle.innerText = formattedcontent;
+        const formattedContent = changeStr(content);
+        urlEle.innerText = formattedContent;
         tdContent.appendChild(urlEle);
         trEle.appendChild(tdContent);
         const addNews = document.getElementById('addNews');
         addNews.appendChild(trEle);
       };
+
+      const setClassName = (getcategory) => {
+        switch (getcategory) {
+          case '製品':
+            return 'product';
+            break;
+          case 'IR 情報':
+            return 'ir';
+            break;
+          case '企業情報':
+            return 'comparny';
+            break;
+          default:
+            return 'otherthings';
+            break;
+        }
+      }
 
       const changeStr = (str) => {
         const strNum = str.length;
@@ -68,15 +70,16 @@
 
       const sortObj = (obj) => {
         for (let i = 0; i < obj.data.length; i++) {
-          const tdday = obj.data[i].day.value;
-          const tdcate = obj.data[i].category.value;
-          const tdcont = obj.data[i].content.value;
-          const tdurl = obj.data[i].url.value;
-          const tdtarget = obj.data[i].target.value;
-          createTable(tdday, tdcate, tdcont, tdurl, tdtarget);
+          const tdDay = obj.data[i].day.value;
+          const tdCate = obj.data[i].category.value;
+          const tdCont = obj.data[i].content.value;
+          const tdUrl = obj.data[i].url.value;
+          const tdTerget = obj.data[i].target.value;
+          createTable(tdDay, tdCate, tdCont, tdUrl, tdTerget);
         }
       }
 
+      const apiUrl = 'https://54o76ppvn8.execute-api.ap-northeast-1.amazonaws.com/prod/bb-dojo';
       axios.get(apiUrl, {
         params: {
           id: 'dojo',
